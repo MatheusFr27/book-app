@@ -3,8 +3,8 @@
         <h1>{{title}}</h1>
         <span class="menu-spacer"></span>
         <div>
-            <button mat-button>Livros</button>
-            <button mat-button>Autores</button>
+            <a mat-button [routerLink]="'/home'">Início</a>
+            <button mat-button [routerLink]="'/books'">Livros</button>
         </div>
     </mat-toolbar-row>
 </mat-toolbar>
