@@ -9,3 +9,11 @@
 .content mat-card {
     width: 200px;
 }
+
+.routerLinkBook {
+    cursor: pointer;
+}
+
+.routerLinkBook:hover {
+    text-decoration: underline;
+}
