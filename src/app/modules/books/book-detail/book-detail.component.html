@@ -1,4 +1,6 @@
+<app-loading *ngIf="!Livro"></app-loading>
 <div
+  *ngIf="Livro"
   class="content"
   fxLayout="column"
   fxLayout.gt-sm="row"
@@ -25,14 +27,14 @@
   <div fxFlex="50%" fxFlex.gt-sm="75%">
     <mat-card class="mat-elevation-z0">
       <div class="row">
-        <span class="mat-display-1">{{Livro.titulo}}</span>
-        <br>
-        <span>Gênero: {{Livro.tipo}}</span>
-        <br>
-        <span *ngIf="Livro.editora">Editora: {{Livro.editora}}</span>
-        <br>
+        <span class="mat-display-1">{{ Livro.titulo }}</span>
+        <br />
+        <span>Gênero: {{ Livro.tipo }}</span>
+        <br />
+        <span *ngIf="Livro.editora">Editora: {{ Livro.editora }}</span>
+        <br />
         <div class="row">
-          <p>{{Livro.descricao}}</p>
+          <p>{{ Livro.descricao }}</p>
         </div>
       </div>
     </mat-card>
