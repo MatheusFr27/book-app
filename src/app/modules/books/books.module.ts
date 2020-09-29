@@ -15,9 +15,10 @@ import { BookCardComponent } from './book-card/book-card.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BookDetailComponent } from './book-detail/book-detail.component';
 import { ComponentsModule } from './../../components/components.module';
+import { NewBooksComponent } from './new-books/new-books.component';
 
 @NgModule({
-  declarations: [BooksComponent, BookCardComponent, BookDetailComponent],
+  declarations: [BooksComponent, BookCardComponent, BookDetailComponent, NewBooksComponent],
   imports: [
     CommonModule,
     BooksRoutingModule,
