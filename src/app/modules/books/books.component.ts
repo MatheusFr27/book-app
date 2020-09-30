@@ -41,5 +41,12 @@ export class BooksComponent implements OnInit, OnDestroy {
       height: '600px',
       disableClose: true,
     });
+
+    dialogRef.afterClosed().subscribe((newBookAdded) => {
+      if (newBookAdded) {
+        this.Livros = undefined;
+        this.findAllBooks();
+      }
+    });
   }
 }
