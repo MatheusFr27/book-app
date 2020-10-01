@@ -22,4 +22,10 @@ export class BooksService {
       { observe: 'response' }
     );
   }
+
+  createNewBook(body: Livro): Observable<HttpResponse<Livro>> {
+    return this.http.post<Livro>(`${API_URL}/livro/criarLivro`, body, {
+      observe: 'response',
+    });
+  }
 }

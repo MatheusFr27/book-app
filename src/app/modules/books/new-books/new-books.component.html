@@ -1,7 +1,7 @@
 <h2 mat-dialog-title>Adicionar um Livro</h2>
 <mat-horizontal-stepper linear="true" #stepper>
   <mat-step [stepControl]="autorFormGroup" editable="false">
-    <ng-template matStepLabel>{{stepAutorLabel}}</ng-template>
+    <ng-template matStepLabel>{{ stepAutorLabel }}</ng-template>
     <form *ngIf="!isNewAutor" [formGroup]="autorFormGroup" class="form">
       <mat-form-field class="form-element">
         <mat-label>Selecione um Autor</mat-label>
@@ -29,6 +29,8 @@
         <mat-label>Biografia</mat-label>
         <textarea
           matInput
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
           formControlName="biografia"
           placeholder="Insira a biografia do autor."
         ></textarea>
@@ -54,6 +56,65 @@
         Próximo
       </button>
     </div>
+  </mat-step>
+  <mat-step [stepControl]="bookFormGroup" editable="false">
+    <form [formGroup]="bookFormGroup" class="form">
+      <ng-template matStepLabel>Livro</ng-template>
+      <mat-form-field class="form-element">
+        <mat-label>Título</mat-label>
+        <input
+          matInput
+          formControlName="titulo"
+          placeholder="Título"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field class="form-element">
+        <mat-label>Editora</mat-label>
+        <input
+          matInput
+          formControlName="editora"
+          placeholder="Editora"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field class="form-element">
+        <mat-label>Gênero</mat-label>
+        <input matInput formControlName="tipo" placeholder="Gênero" required />
+      </mat-form-field>
+      <mat-form-field class="form-element">
+        <mat-label>Descrição</mat-label>
+        <textarea
+          matInput
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          formControlName="descricao"
+          placeholder="Descrição do livro"
+          required
+        ></textarea>
+      </mat-form-field>
+      <mat-form-field class="form-element">
+        <mat-label>Imagem</mat-label>
+        <input
+          matInput
+          formControlName="imagemF"
+          placeholder="imagem do livro"
+          required
+        />
+      </mat-form-field>
+      <div class="form-element">
+        <button
+          class="button"
+          color="primary"
+          mat-button
+          [mat-dialog-close]="true"
+          [disabled]="bookFormGroup.invalid"
+          (click)="createNewBook()"
+        >
+          Adicionar um novo livro
+        </button>
+      </div>
+    </form>
   </mat-step>
 </mat-horizontal-stepper>
 <div class="form-element">

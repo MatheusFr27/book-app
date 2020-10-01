@@ -3,8 +3,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Autor } from './../../../core/models/autor.model';
 import { AutorsService } from './../../../core/services/autors.service';
-//import {CdkTextareaAutosize} from '@angular/cdk/text-field'
-import {MyToastrService} from './../../../core/services/toastr.service'
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { MyToastrService } from './../../../core/services/toastr.service';
+import { BooksService } from './../../../core/services/books.service';
 
 @Component({
   selector: 'app-new-books',
@@ -17,17 +18,22 @@ export class NewBooksComponent implements OnInit, OnDestroy {
   autorFormGroup: FormGroup;
   isNewAutor: boolean = false;
   autores: Autor[];
-  stepAutorLabel: String = 'Autor'
+  stepAutorLabel: String = 'Autor';
+  bookFormGroup: FormGroup;
 
-  //@ViewChild('autosize') autosize: CdkTextareaAutosize
+  @ViewChild('autosize') autosize: CdkTextareaAutosize;
 
-  constructor(private autorsService: AutorsService,
+  constructor(
+    private autorsService: AutorsService,
     private builder: FormBuilder,
-    private toastr: MyToastrService) {}
+    private toastr: MyToastrService,
+    private booksService: BooksService
+  ) {}
 
   ngOnInit(): void {
-    this.findAllAutors()
-    this.initializeSelectAutorFormGroup()
+    this.findAllAutors();
+    this.initializeSelectAutorFormGroup();
+    this.initializeBookFormGroup();
   }
 
   ngOnDestroy(): void {
@@ -36,10 +42,10 @@ export class NewBooksComponent implements OnInit, OnDestroy {
 
   findAllAutors(): void {
     this.httpRequest = this.autorsService.findAllAutors().subscribe(
-      response => {
+      (response) => {
         this.autores = response.body['autor'];
       },
-      err => {
+      (err) => {
         console.log(err.error['message']);
       }
     );
@@ -47,44 +53,82 @@ export class NewBooksComponent implements OnInit, OnDestroy {
 
   initializeSelectAutorFormGroup(): void {
     this.autorFormGroup = this.builder.group({
-      autor: this.builder.control(null, [Validators.required])
-    })
+      autor: this.builder.control(null, [Validators.required]),
+    });
   }
 
   initializeNewAutorFormGroup(): void {
     this.autorFormGroup = this.builder.group({
       nome: this.builder.control(null, [Validators.required]),
       imagemA: this.builder.control(null),
-      biografia: this.builder.control(null)
-    })
+      biografia: this.builder.control(null),
+    });
+  }
+
+  initializeBookFormGroup(): void {
+    this.bookFormGroup = this.builder.group({
+      titulo: this.builder.control(null, [Validators.required]),
+      editora: this.builder.control(null),
+      tipo: this.builder.control(null, [Validators.required]),
+      descricao: this.builder.control(null, [Validators.required]),
+      imagemF: this.builder.control(null),
+      autor: this.builder.control(null, [Validators.required]),
+    });
   }
 
   newAutor(): void {
-    this.isNewAutor = !this.isNewAutor
-    this.initializeNewAutorFormGroup()
+    this.isNewAutor = !this.isNewAutor;
+    this.initializeNewAutorFormGroup();
   }
 
   selectAutor(): void {
-    this.isNewAutor = !this.isNewAutor
-    this.findAllAutors()
-    this.initializeSelectAutorFormGroup()
+    this.isNewAutor = !this.isNewAutor;
+    this.findAllAutors();
+    this.initializeSelectAutorFormGroup();
   }
 
   nextStep(): void {
-    if(this.isNewAutor) {
-      this.createNewAutor(this.autorFormGroup.value)
+    if (this.isNewAutor) {
+      this.createNewAutor(this.autorFormGroup.value);
     } else {
-      // Definir o id no formulário de filme
-      this.stepAutorLabel = `Autor: ${this.autorFormGroup.value['autor']['nome']}`
+      this.bookFormGroup.controls['autor'].setValue(
+        this.autorFormGroup.value['autor']['_id']
+      );
+      this.stepAutorLabel = `Autor: ${this.autorFormGroup.value['autor']['nome']}`;
     }
   }
 
   createNewAutor(formValueAutor: Autor): void {
-    this.httpRequest = this.autorsService.createNewAutor(formValueAutor).subscribe(response => {
-      this.stepAutorLabel = `Autor: ${response.body['autor']['nome']}`
-      this.toastr.showToastrSuccess(`O autor ${response.body['autor']['nome']} foi adicionado com sucesso.`)
-    }, err => {
-      this.toastr.showToastrError(`$(err.error['message'])`)
-    })
+    this.httpRequest = this.autorsService
+      .createNewAutor(formValueAutor)
+      .subscribe(
+        (response) => {
+          this.bookFormGroup.controls['autor'].setValue(
+            response.body['autor']['_id']
+          );
+          this.stepAutorLabel = `Autor: ${response.body['autor']['nome']}`;
+          this.toastr.showToastrSuccess(
+            `O autor ${response.body['autor']['nome']} foi adicionado com sucesso.`
+          );
+        },
+        (err) => {
+          this.toastr.showToastrError(`$(err.error['message'])`);
+        }
+      );
+  }
+
+  createNewBook(): void {
+    this.httpRequest = this.booksService
+      .createNewBook(this.bookFormGroup.value)
+      .subscribe(
+        (response) => {
+          this.toastr.showToastrSuccess(
+            `O filme ${['livro']['titulo']} foi adicionado com sucesso`
+          );
+        },
+        (err) => {
+          this.toastr.showToastrError(`$(err.error['message'])`);
+        }
+      );
   }
 }
