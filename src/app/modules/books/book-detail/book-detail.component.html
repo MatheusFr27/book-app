@@ -1,6 +1,7 @@
-<app-loading *ngIf="!Livro"></app-loading>
+<app-loading *ngIf="!Livro && !hasError"></app-loading>
+<app-error *ngIf="!Livro && hasError"></app-error>
 <div
-  *ngIf="Livro"
+  *ngIf="Livro && !hasError"
   class="content"
   fxLayout="column"
   fxLayout.gt-sm="row"

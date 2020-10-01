@@ -13,6 +13,7 @@ import { NewBooksComponent } from './new-books/new-books.component';
 export class BooksComponent implements OnInit, OnDestroy {
   private httpRequest: Subscription;
   Livros: Livro[];
+  hasError: boolean = false
 
   constructor(private booksServices: BooksService, private dialog: MatDialog) {}
 
@@ -30,7 +31,7 @@ export class BooksComponent implements OnInit, OnDestroy {
         this.Livros = response.body['livro'];
       },
       (err) => {
-        console.log(err);
+        this.hasError = true
       }
     );
   }

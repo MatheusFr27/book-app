@@ -1,7 +1,15 @@
-<app-loading *ngIf="!Livros"></app-loading>
-<div *ngIf="Livros" class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
+<app-loading *ngIf="!Livros && !hasError"></app-loading>
+<app-error *ngIf="!Livros && hasError"></app-error>
+<div
+  *ngIf="Livros && !hasError"
+  class="content"
+  fxLayout="row wrap"
+  fxLayoutGap="16px grid"
+>
   <div fxFlex="100%" fxFlex.sm="100%" fxFlex.sm="100%">
-    <button mat-flat-button color="primary" (click)="openNewBookModal()">Adicionar Livro</button>
+    <button mat-flat-button color="primary" (click)="openNewBookModal()">
+      Adicionar Livro
+    </button>
   </div>
   <div
     fxFlex="25%"

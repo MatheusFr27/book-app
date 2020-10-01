@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 export class BookDetailComponent implements OnInit, OnDestroy {
   private httpRequest: Subscription;
   Livro: Livro;
+  hasError: boolean = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -29,12 +30,13 @@ export class BookDetailComponent implements OnInit, OnDestroy {
 
   findBookByName(bookName: String): void {
     this.httpRequest = this.BooksService.findBookByName(bookName).subscribe(
-      response => {
+      (response) => {
         this.Livro = response.body['livro'];
-        console.log(response.body)
+        console.log(response.body);
       },
-      err => {
-        console.log(err);
-      })
+      (err) => {
+        this.hasError = true;
+      }
+    );
   }
 }
