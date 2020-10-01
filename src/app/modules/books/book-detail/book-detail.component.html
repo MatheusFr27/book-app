@@ -19,6 +19,7 @@
           class="autorImage"
           [src]="Livro.autor.imagemA"
           alt="Foto Autor"
+          onError="this.src='https://toppng.com/uploads/preview/icone-homem-man-icon-11553494437bgj8eja2bq.png'"
         />
         <div class="autorName">{{ Livro.autor.nome }}</div>
       </mat-card-header>
