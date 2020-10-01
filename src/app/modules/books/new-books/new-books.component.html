@@ -107,7 +107,6 @@
           class="button"
           color="primary"
           mat-button
-          [mat-dialog-close]="true"
           [disabled]="bookFormGroup.invalid"
           (click)="createNewBook()"
         >
@@ -118,7 +117,7 @@
   </mat-step>
 </mat-horizontal-stepper>
 <div class="form-element">
-  <button mat-button class="button" color="warning" [mat-dialog-close]="false">
+  <button mat-button class="button" color="warning" (click)="closeDialog()">
     Fechar
   </button>
 </div>

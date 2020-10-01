@@ -6,6 +6,7 @@ import { AutorsService } from './../../../core/services/autors.service';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { MyToastrService } from './../../../core/services/toastr.service';
 import { BooksService } from './../../../core/services/books.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-new-books',
@@ -27,7 +28,8 @@ export class NewBooksComponent implements OnInit, OnDestroy {
     private autorsService: AutorsService,
     private builder: FormBuilder,
     private toastr: MyToastrService,
-    private booksService: BooksService
+    private booksService: BooksService,
+    private dialogRef: MatDialogRef<NewBooksComponent>
   ) {}
 
   ngOnInit(): void {
@@ -125,10 +127,16 @@ export class NewBooksComponent implements OnInit, OnDestroy {
           this.toastr.showToastrSuccess(
             `O filme ${['livro']['titulo']} foi adicionado com sucesso`
           );
+          this.dialogRef.close(true);
         },
         (err) => {
           this.toastr.showToastrError(`$(err.error['message'])`);
+          this.dialogRef.close(false);
         }
       );
+  }
+
+  closeDialog(): void {
+    this.dialogRef.close(false);
   }
 }
