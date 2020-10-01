@@ -7,6 +7,8 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { MyToastrService } from './../../../core/services/toastr.service';
 import { BooksService } from './../../../core/services/books.service';
 import { MatDialogRef } from '@angular/material/dialog';
+import { AutorValidator } from './../../../core/validators/autor.validator';
+import { bookValidator } from './../../../core/validators/livro.validator';
 
 @Component({
   selector: 'app-new-books',
@@ -29,7 +31,9 @@ export class NewBooksComponent implements OnInit, OnDestroy {
     private builder: FormBuilder,
     private toastr: MyToastrService,
     private booksService: BooksService,
-    private dialogRef: MatDialogRef<NewBooksComponent>
+    private dialogRef: MatDialogRef<NewBooksComponent>,
+    private autorValidator: AutorValidator,
+    private bookValidator: bookValidator
   ) {}
 
   ngOnInit(): void {
@@ -61,7 +65,11 @@ export class NewBooksComponent implements OnInit, OnDestroy {
 
   initializeNewAutorFormGroup(): void {
     this.autorFormGroup = this.builder.group({
-      nome: this.builder.control(null, [Validators.required]),
+      nome: this.builder.control(
+        null,
+        [Validators.required],
+        this.autorValidator.validatorUniqueAutorName()
+      ),
       imagemA: this.builder.control(null),
       biografia: this.builder.control(null),
     });
@@ -69,7 +77,11 @@ export class NewBooksComponent implements OnInit, OnDestroy {
 
   initializeBookFormGroup(): void {
     this.bookFormGroup = this.builder.group({
-      titulo: this.builder.control(null, [Validators.required]),
+      titulo: this.builder.control(
+        null,
+        [Validators.required],
+        this.bookValidator.validatorUniqueBookName()
+      ),
       editora: this.builder.control(null),
       tipo: this.builder.control(null, [Validators.required]),
       descricao: this.builder.control(null, [Validators.required]),
@@ -138,5 +150,13 @@ export class NewBooksComponent implements OnInit, OnDestroy {
 
   closeDialog(): void {
     this.dialogRef.close(false);
+  }
+
+  autorNameExists(): boolean {
+    return this.autorFormGroup.get('nome').hasError('autorNameAlreadyExists');
+  }
+
+  bookNameExists(): boolean {
+    return this.bookFormGroup.get('nome').hasError('bookNameAlreadyExists');
   }
 }

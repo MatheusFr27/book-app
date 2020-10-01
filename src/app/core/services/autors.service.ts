@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Autor } from './../models/autor.model';
 import { API_URL } from './../api';
@@ -21,4 +21,11 @@ export class AutorsService {
       observe: 'response',
     });
   }
+
+  validatorUniqueAutorName(autorName: string){
+    let MyParams = new HttpParams()
+    MyParams = MyParams.append('nome', autorName)
+    return this.http.get<any>(`${API_URL}/autor/validarNomeAutor`, {params: MyParams})
+  }
+
 }

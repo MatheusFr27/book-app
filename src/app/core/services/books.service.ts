@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { observable, Observable } from 'rxjs';
+import { HttpClient, HttpResponse, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { Livro } from './../models/livro.model';
 import { API_URL } from './../api';
 
@@ -27,5 +27,11 @@ export class BooksService {
     return this.http.post<Livro>(`${API_URL}/livro/criarLivro`, body, {
       observe: 'response',
     });
+  }
+
+  validatorUniqueBookName(bookName: string){
+    let myParams = new HttpParams()
+    myParams = myParams.append('nome', bookName)
+    return this.http.get<any>(`${API_URL}/livro/validarTituloLivro`, { params: myParams})
   }
 }
