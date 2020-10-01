@@ -1,0 +1,19 @@
+.autor-image {
+    background-size: cover;
+}
+
+.imagem {
+    height: 400px;
+}
+
+.content mat-card {
+    width: 200px;
+}
+
+.routerLinkBook {
+    cursor: pointer;
+}
+
+.routerLinkBook:hover {
+    text-decoration: underline;
+}

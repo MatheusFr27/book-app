@@ -1,0 +1,44 @@
+<app-loading *ngIf="!Livro && !hasError"></app-loading>
+<app-error *ngIf="!Livro && hasError"></app-error>
+<div
+  *ngIf="Livro && !hasError"
+  class="content"
+  fxLayout="column"
+  fxLayout.gt-sm="row"
+  fxLayoutAlign="start center"
+  fxLayoutAlign.gt-sm="center start"
+  fxLayoutGap="16px"
+>
+  <div fxFlex="50%" fxFlex.gt-sm="25%">
+    <mat-card class="mat-elevation-z0">
+      <img mat-card-image class="bookCover" [src]="Livro.imagemF" alt="Photo" />
+    </mat-card>
+    <mat-card class="mat-elevation-z3">
+      <mat-card-header>
+        <img
+          mat-card-avatar
+          class="autorImage"
+          [src]="Livro.autor.imagemA"
+          alt="Foto Autor"
+          onError="this.src='https://toppng.com/uploads/preview/icone-homem-man-icon-11553494437bgj8eja2bq.png'"
+        />
+        <div class="autorName">{{ Livro.autor.nome }}</div>
+      </mat-card-header>
+    </mat-card>
+  </div>
+  <div fxFlex="50%" fxFlex.gt-sm="75%">
+    <mat-card class="mat-elevation-z0">
+      <div class="row">
+        <span class="mat-display-1">{{ Livro.titulo }}</span>
+        <br />
+        <span>Gênero: {{ Livro.tipo }}</span>
+        <br />
+        <span *ngIf="Livro.editora">Editora: {{ Livro.editora }}</span>
+        <br />
+        <div class="row">
+          <p>{{ Livro.descricao }}</p>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>
