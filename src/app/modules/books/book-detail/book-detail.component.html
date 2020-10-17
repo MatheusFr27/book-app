@@ -13,7 +13,10 @@
     <mat-card class="mat-elevation-z0">
       <img mat-card-image class="bookCover" [src]="Livro.imagemF" alt="Photo" />
     </mat-card>
-    <mat-card class="mat-elevation-z3">
+    <mat-card
+      class="mat-elevation-z3 selecionado"
+      [routerLink]="['/authors/detail', Livro.autor.nome]"
+    >
       <mat-card-header>
         <img
           mat-card-avatar

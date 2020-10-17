@@ -22,7 +22,6 @@ export class AuthorsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.findAllAuthors();
-    console.log(this.authors);
   }
 
   ngOnDestroy(): void {
@@ -33,7 +32,6 @@ export class AuthorsComponent implements OnInit, OnDestroy {
     this.httpRequest = this.service.findAllAuthors().subscribe(
       (response) => {
         this.authors = response.body['autor'];
-        console.log(this.authors);
       },
       (err) => {
         this.hasError = true;

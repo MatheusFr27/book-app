@@ -1,5 +1,5 @@
 <mat-card class="mat-elevation-z4">
-  <mat-card-header>
+  <mat-card-header *ngIf="showHeader">
     <img mat-card-avatar class="autor-image" [src]="Livro.autor.imagemA" onError="this.src='https://toppng.com/uploads/preview/icone-homem-man-icon-11553494437bgj8eja2bq.png'"/>
     <mat-card-title class="routerLinkBook" [routerLink]="['/books/detail', Livro.titulo]">{{
       Livro.titulo
@@ -16,6 +16,6 @@
     alt="{{ Livro.titulo }}"
   />
   <mat-card-content>
-    <p>{{ sliceSnyposis(Livro.descricao) }}</p>
+    <p *ngIf="showSynopsis">{{ sliceSnyposis(Livro.descricao) }}</p>
   </mat-card-content>
 </mat-card>

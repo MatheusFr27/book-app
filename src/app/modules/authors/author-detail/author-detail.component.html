@@ -1,1 +1,57 @@
-<p>author-detail works!</p>
+<app-loading *ngIf="!Author && !hasError"></app-loading>
+<app-error *ngIf="!Author && hasError"></app-error>
+<div
+  *ngIf="Author && !hasError"
+  class="content"
+  fxLayout="row wrap"
+  fxLayoutGap="16px grid"
+>
+  <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%">
+    <mat-card class="mat-elevation-z0">
+      <img
+        mat-card-image
+        class="authorCover-image"
+        [src]="Author.imagemA"
+        onError="this.src='https://toppng.com/uploads/preview/icone-homem-man-icon-11553494437bgj8eja2bq.png'"
+      />
+    </mat-card>
+  </div>
+  <div fxFlex="75%" fxFlex.xs="100%" fxFlex.sm="67%">
+    <mat-card class="mat-elevation-z0">
+      <div class="row">
+        <span class="mat-display-1">{{ Author.nome }}</span>
+        <br />
+        <span>{{ countBooksOnAuthor(Author.autoria.length) }}</span>
+      </div>
+      <br />
+      <div class="row">
+        <p *ngIf="Author.biografia" class="authorBiography">
+          {{ Author.biografia }}
+        </p>
+        <p *ngIf="!Author.biografia" class="authorBiography">
+          Não foi informado a biografia do autor.
+        </p>
+      </div>
+    </mat-card>
+  </div>
+  <div>
+    <span class="mat-subheading-2">{{
+      titleBooksOnAuthor(Author.autoria.length)
+    }}</span>
+    <br />
+    <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
+      <div
+        fxFlex="25%"
+        fxFlex.xs="100%"
+        fxFlex.sm="33%"
+        *ngFor="let book of Author.autoria"
+      >
+        <app-book-card
+          [Livro]="book"
+          [showHeader]="false"
+          [showSynopsis]="false"
+        ></app-book-card>
+      </div>
+    </div>
+  </div>
+</div>

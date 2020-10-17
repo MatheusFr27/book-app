@@ -1,6 +1,10 @@
 <mat-card class="mat-elevation-z4">
   <mat-card-header>
-    <mat-card-title>{{ Author.nome }}</mat-card-title>
+    <mat-card-title
+      class="selecionado"
+      [routerLink]="['/authors/detail', Author.nome]"
+      >{{ Author.nome }}</mat-card-title
+    >
     <mat-card-subtitle>{{
       countBooksOnAuthor(Author.autoria.length)
     }}</mat-card-subtitle>
@@ -11,6 +15,7 @@
     [src]="Author.imagemA"
     onError="this.src='https://toppng.com/uploads/preview/icone-homem-man-icon-11553494437bgj8eja2bq.png'"
     alt="Photo of Author"
+    [routerLink]="['/authors/detail', Author.nome]"
   />
   <mat-card-content>
     <p *ngIf="Author.biografia">{{ sliceBiography(Author.biografia) }}</p>

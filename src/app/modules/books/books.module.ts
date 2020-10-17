@@ -18,7 +18,12 @@ import { ComponentsModule } from './../../components/components.module';
 import { NewBooksComponent } from './new-books/new-books.component';
 
 @NgModule({
-  declarations: [BooksComponent, BookCardComponent, BookDetailComponent, NewBooksComponent],
+  declarations: [
+    BooksComponent,
+    BookCardComponent,
+    BookDetailComponent,
+    NewBooksComponent,
+  ],
   imports: [
     CommonModule,
     BooksRoutingModule,
@@ -33,5 +38,6 @@ import { NewBooksComponent } from './new-books/new-books.component';
     MatFormFieldModule,
     MatInputModule,
   ],
+  exports: [BookCardComponent],
 })
 export class BooksModule {}
