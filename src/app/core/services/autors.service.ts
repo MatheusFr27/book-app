@@ -10,7 +10,7 @@ import { API_URL } from './../api';
 export class AutorsService {
   constructor(private http: HttpClient) {}
 
-  findAllAutors(): Observable<HttpResponse<Autor[]>> {
+  findAllAuthors(): Observable<HttpResponse<Autor[]>> {
     return this.http.get<Autor[]>(`${API_URL}/autor/visualizarTodosAutores`, {
       observe: 'response',
     });

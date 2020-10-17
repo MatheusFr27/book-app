@@ -1,14 +1,15 @@
 <mat-toolbar color="primary">
-    <mat-toolbar-row>
-        <h1>{{title}}</h1>
-        <span class="menu-spacer"></span>
-        <div>
-            <a mat-button [routerLink]="'/home'">Início</a>
-            <button mat-button [routerLink]="'/books'">Livros</button>
-        </div>
-    </mat-toolbar-row>
+  <mat-toolbar-row>
+    <h1>{{ title }}</h1>
+    <span class="menu-spacer"></span>
+    <div>
+      <a mat-button [routerLink]="'/home'">Início</a>
+      <button mat-button [routerLink]="'/books'">Livros</button>
+      <button mat-button [routerLink]="'/authors'">Autores</button>
+    </div>
+  </mat-toolbar-row>
 </mat-toolbar>
 <!-- Outlet de rotas -->
 <div class="outlet">
-    <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </div>

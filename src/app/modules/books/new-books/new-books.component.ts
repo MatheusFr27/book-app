@@ -47,7 +47,7 @@ export class NewBooksComponent implements OnInit, OnDestroy {
   }
 
   findAllAutors(): void {
-    this.httpRequest = this.autorsService.findAllAutors().subscribe(
+    this.httpRequest = this.autorsService.findAllAuthors().subscribe(
       (response) => {
         this.autores = response.body['autor'];
       },
@@ -157,6 +157,6 @@ export class NewBooksComponent implements OnInit, OnDestroy {
   }
 
   bookNameExists(): boolean {
-    return this.bookFormGroup.get('nome').hasError('bookNameAlreadyExists');
+    return this.bookFormGroup.get('titulo').hasError('bookNameAlreadyExists');
   }
 }
