@@ -143,13 +143,13 @@ export class NewBooksComponent implements OnInit, OnDestroy {
         },
         (err) => {
           this.toastr.showToastrError(`$(err.error['message'])`);
-          this.dialogRef.close(false);
+          this.dialogRef.close();
         }
       );
   }
 
-  closeDialog(): void {
-    this.dialogRef.close(false);
+  closeDialog(b: boolean = false): void {
+    this.dialogRef.close(b);
   }
 
   autorNameExists(): boolean {
