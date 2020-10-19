@@ -44,4 +44,10 @@ export class BooksService {
       { observe: 'response' }
     );
   }
+
+  deleteBookById(bookId: String): Observable<HttpResponse<Livro>> {
+    return this.http.delete<Livro>(`${API_URL}/livro/deletarLivro/${bookId}`, {
+      observe: 'response',
+    });
+  }
 }
