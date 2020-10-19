@@ -1,18 +1,22 @@
-.content{
-    padding: 10px;
+.content {
+  padding: 10px;
 }
 
 .bookCover {
-    height: 400px;
-    max-width: 400px;
+  height: 400px;
+  max-width: 400px;
 }
 
-.autorImage{
-    background-size: cover;
+.autorImage {
+  background-size: cover;
 }
 
-.autorName{
-    font-size: 16px;
-    margin-top: 10px;
-    margin-left: -20px;
+.autorName {
+  font-size: 16px;
+  margin-top: 10px;
+  margin-left: -20px;
+}
+
+.selecionado {
+  cursor: pointer;
 }

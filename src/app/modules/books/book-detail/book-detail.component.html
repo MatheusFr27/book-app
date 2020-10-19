@@ -13,7 +13,10 @@
     <mat-card class="mat-elevation-z0">
       <img mat-card-image class="bookCover" [src]="Livro.imagemF" alt="Photo" />
     </mat-card>
-    <mat-card class="mat-elevation-z3">
+    <mat-card
+      class="mat-elevation-z3 selecionado"
+      [routerLink]="['/authors/detail', Livro.autor.nome]"
+    >
       <mat-card-header>
         <img
           mat-card-avatar
@@ -25,6 +28,26 @@
         <div class="autorName">{{ Livro.autor.nome }}</div>
       </mat-card-header>
     </mat-card>
+    <br />
+    <div class="row">
+      <button
+        mat-mini-fab
+        color="primary"
+        aria-label="Atualizar livro"
+        (click)="openUpdateBookModal()"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+      &nbsp;
+      <button
+        mat-mini-fab
+        color="warn"
+        aria-label="Deletar Livro"
+        (click)="openConfirmModal()"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
   </div>
   <div fxFlex="50%" fxFlex.gt-sm="75%">
     <mat-card class="mat-elevation-z0">

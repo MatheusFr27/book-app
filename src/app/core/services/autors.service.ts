@@ -10,7 +10,7 @@ import { API_URL } from './../api';
 export class AutorsService {
   constructor(private http: HttpClient) {}
 
-  findAllAutors(): Observable<HttpResponse<Autor[]>> {
+  findAllAuthors(): Observable<HttpResponse<Autor[]>> {
     return this.http.get<Autor[]>(`${API_URL}/autor/visualizarTodosAutores`, {
       observe: 'response',
     });
@@ -22,10 +22,18 @@ export class AutorsService {
     });
   }
 
-  validatorUniqueAutorName(autorName: string){
-    let MyParams = new HttpParams()
-    MyParams = MyParams.append('nome', autorName)
-    return this.http.get<any>(`${API_URL}/autor/validarNomeAutor`, {params: MyParams})
+  validatorUniqueAutorName(autorName: string) {
+    let MyParams = new HttpParams();
+    MyParams = MyParams.append('nome', autorName);
+    return this.http.get<any>(`${API_URL}/autor/validarNomeAutor`, {
+      params: MyParams,
+    });
   }
 
+  findAuthorByName(authorName: String): Observable<HttpResponse<Autor>> {
+    return this.http.get<Autor>(
+      `${API_URL}/autor/visualizarUmAutor/${authorName}`,
+      { observe: 'response' }
+    );
+  }
 }

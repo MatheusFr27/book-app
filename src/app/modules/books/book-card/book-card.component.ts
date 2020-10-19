@@ -9,6 +9,8 @@ import {Livro} from './../../../core/models/livro.model'
 export class BookCardComponent implements OnInit {
 
   @Input() Livro: Livro
+  @Input() showHeader: boolean = true
+  @Input() showSynopsis: boolean = true
 
   constructor() { }
 
