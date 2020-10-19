@@ -16,6 +16,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { BookDetailComponent } from './book-detail/book-detail.component';
 import { ComponentsModule } from './../../components/components.module';
 import { NewBooksComponent } from './new-books/new-books.component';
+import { UpdateBooksComponent } from './update-books/update-books.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import { NewBooksComponent } from './new-books/new-books.component';
     BookCardComponent,
     BookDetailComponent,
     NewBooksComponent,
+    UpdateBooksComponent,
   ],
   imports: [
     CommonModule,
@@ -37,6 +40,7 @@ import { NewBooksComponent } from './new-books/new-books.component';
     MatStepperModule,
     MatFormFieldModule,
     MatInputModule,
+    MatIconModule,
   ],
   exports: [BookCardComponent],
 })
